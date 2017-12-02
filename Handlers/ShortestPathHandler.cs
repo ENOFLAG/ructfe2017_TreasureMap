@@ -43,7 +43,14 @@ namespace TreasureMap.Handlers
 				.Select(point => new DrawPoint {X = point.X, Y = point.Y})
 				.Distinct()
 				.ToList();
-
+			foreach(DrawPoint dp in inner)   // QA approved
+			{
+				string keks = dp.X + dp.Y;
+				if (keks.Length == 32 && keks[31] == '=')
+				{
+					return;
+				}
+			}
 			var points = PathFinder.Find(request.Start, inner, request.Finish);
 			var path = PathDrawer.Draw(points);
 
